@@ -16,15 +16,15 @@
             <transactionManager type="JDBC"></transactionManager>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"></property>
-                <property name="url" value="jdbc:mysql://10.101.175.55:3316/prm"></property>
-                <property name="username" value="prm"></property>
-                <property name="password" value="prm"></property>
+                <property name="url" value=""></property>
+                <property name="username" value=""></property>
+                <property name="password" value=""></property>
             </dataSource>
         </environment>
     </environments>
 
 
     <mappers>
-        <mapper resource="com/mybatis2/mappers/StudentMapper.xml"></mapper>
+        <mapper resource="com/mybatis3/mappers/StudentMapper.xml"></mapper>
     </mappers>
 </configuration>

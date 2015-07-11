@@ -28,7 +28,7 @@ public class MyBatisSqlSessionFactory {
 
                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             } catch (IOException e) {
-                throw new RuntimeException(e.getCause());
+                throw new RuntimeException(e);
             }
         }
 
