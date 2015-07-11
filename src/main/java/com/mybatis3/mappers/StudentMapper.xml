@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis3.mappers.StudentMapper">
+
+    <!--定义返回的结果映射MAP  author:wangchen.gpx  since：15/7/11-->
+    <resultMap id="StudentResult" type="Student">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="dob" column="dob"/>
+    </resultMap>
+
+    <!--查询所有的学生  author:wangchen.gpx  since：15/7/11-->
+    <select id="findAllStudents" resultMap="StudentResult">
+        select * from students
+    </select>
+
+    <!--根据学生ID查询指定的学生信息  author:wangchen.gpx  since：15/7/11-->
+    <select id="findStudentById" parameterType="int" resultType="Student">
+        select
+          id,
+          name,
+          email,
+          dob
+        from students
+        where id = #{id}
+    </select>
+
+    <!--插入学生信息  author:wangchen.gpx  since：15/7/11-->
+    <insert id="insertStudent" parameterType="Student">
+        insert into students(id, name, email, dob) VALUES (#{id}, #{name}, #{email}, #{dob})
+    </insert>
+</mapper>
+
