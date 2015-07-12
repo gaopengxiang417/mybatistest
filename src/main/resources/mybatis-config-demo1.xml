@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+
+<configuration>
+
+    <!--这个配置是可以动态喜欢外部的配置文件  author:wangchen.gpx  since：15/7/12-->
+    <properties resource="config.properties">
+        <property name="username" value="dev_user"/>
+        <property name="password" value="dskjslkdjs"/>
+    </properties>
+
+    <settings>
+        <!--配置映射器中得缓存全局开关  author:wangchen.gpx  since：15/7/12-->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <!--为java类型设置一个短得名字,只是用来减少类的完全限定名的冗余  author:wangchen.gpx  since：15/7/12-->
+        <typeAlias alias="Tutor" type="com.mybatis3.domain.Tutor"/>
+
+        <!--扫描指定包下面的所有java类,作为一个首字母小写的别名  author:wangchen.gpx  since：15/7/12-->
+        <package name="com.mybatis3.domain"/>
+    </typeAliases>
+
+    <!--设置java类型和数据库类型的转换关系  author:wangchen.gpx  since：15/7/12-->
+    <typeHandlers>
+        <typeHandler handler="com.mybatis3.typehadnlers.PhoneTypeHandler"/>
+        <package name="com.mybatis3.typehandlers"/>
+    </typeHandlers>
+
+    <!--配置不同的环境信息,解决映射到不同的数据库  author:wangchen.gpx  since：15/7/12-->
+    <environments default="development">
+
+        <!--开发环境  author:wangchen.gpx  since：15/7/12-->
+        <environment id="development">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driverClassName}"/>
+                <property name="user" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+
+        <!--线上环境  author:wangchen.gpx  since：15/7/12-->
+        <environment id="production">
+            <transactionManager type="MANAGED"></transactionManager>
+            <dataSource type="JNDI">
+                <property name="data_source" value="java:comp/jdbc/MyBatisDemoDS"/>
+            </dataSource>
+        </environment>
+
+    </environments>
+
+    <!--映射器,主要是告诉mybatis去哪里查找这些sql语句  author:wangchen.gpx  since：15/7/12-->
+    <mappers>
+        <mapper resource="com/mybatis3/mappers/StudentMapper.xml"/>
+        <mapper url="file:///D:/mybatisdemo/mappers/TutorMapper.xml"/>
+        <mapper class="com.mybatis3.mappers.TutorMapper"/>
+    </mappers>
+    
+    <!--读取整个配置文件中来替换动态配置属性值  author:wangchen.gpx  since：15/7/12-->
+
+</configuration>
